@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Selamat Ulang Tahun wehhhh</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS Configuration & Animations -->
+    <style>
+        :root {
+            --primary-bg: #4a0024;
+            --secondary-bg: #8b0037;
+            --tertiary-bg: #2d0016;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(-45deg, #ff758c, #ff7eb3, #c53364, #7a003f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        .font-romantic { font-family: 'Dancing Script', cursive; }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Elements (Hearts & Roses) */
+        .floating-item {
+            position: absolute;
+            top: -10%;
+            user-select: none;
+            pointer-events: none;
+            animation: floatDown linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatDown {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Page Transitions */
+        .page-section {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 10;
+        }
+        .page-section.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Specific Animations */
+        .pulse-btn {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .wiggle {
+            animation: wiggle 2s linear infinite;
+        }
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-15deg); }
+            20% { transform: rotateZ(10deg); }
+            25% { transform: rotateZ(-10deg); }
+            30% { transform: rotateZ(6deg); }
+            35% { transform: rotateZ(-4deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+
+        .shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .fly-up {
+            animation: flyUp 1.5s ease-out forwards;
+        }
+        @keyframes flyUp {
+            0% { opacity: 0; transform: translateY(50px) scale(0.5); }
+            100% { opacity: 1; transform: translateY(-50px) scale(1.2); }
+        }
+
+        /* Confetti piece */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+        }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            margin-top: -12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.4);
+            border-radius: 4px;
+        }
+        
+        .typewriter-text {
+            border-right: 2px solid white;
+            white-space: pre-wrap;
+            animation: blink 0.75s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+        }
+        
+        /* Hide scrollbar for text areas */
+        textarea::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="h-screen w-full m-0 p-0">
+
+<div id="floating-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+<!-- Main App Container (Mobile First) -->
+<div class="relative w-full max-w-md mx-auto h-full z-10 flex flex-col justify-center p-4">
+
+    <section id="page-countdown" class="page-section active glass-panel rounded-3xl p-6 text-center shadow-2xl mx-4">
+        <h1 class="font-romantic text-4xl mb-2">Menunggu Waktu...</h1>
+        <p class="text-sm opacity-90 mb-6">just waiting for the time <span id="lbl-nama" class="font-bold"></span></p>
+        
+        <div class="flex justify-center gap-3 mb-8">
+            <div class="bg-white/20 rounded-xl p-3 w-16">
+                <div id="cd-hari" class="text-2xl font-bold">00</div>
+                <div class="text-xs">Hari</div>
+            </div>
+            <div class="bg-white/20 rounded-xl p-3 w-16">
+                <div id="cd-jam" class="text-2xl font-bold">00</div>
+                <div class="text-xs">Jam</div>
+            </div>
+            <div class="bg-white/20 rounded-xl p-3 w-16">
+                <div id="cd-menit" class="text-2xl font-bold">00</div>
+                <div class="text-xs">Menit</div>
+            </div>
+            <div class="bg-white/20 rounded-xl p-3 w-16">
+                <div id="cd-detik" class="text-2xl font-bold">00</div>
+                <div class="text-xs">Detik</div>
+            </div>
+        </div>
+
+        <button id="btn-open-gift" disabled 
+            class="bg-white/30 text-white/50 px-8 py-3 rounded-full font-bold transition-all duration-300 flex items-center gap-2 mx-auto cursor-not-allowed">
+            <span>🔒</span> Waktu Belum Tiba
+        </button>
+    </section>
+
+    <section id="page-gift" class="page-section">
+        <div class="text-center">
+            <h2 class="font-romantic text-4xl mb-8 drop-shadow-lg" id="gift-title">Ketuk kadonya 🎁</h2>
+            
+            <div id="gift-box" class="text-9xl cursor-pointer wiggle transition-transform hover:scale-110 drop-shadow-2xl">
+                🎁
+            </div>
+
+            <div id="short-message" class="hidden font-romantic text-3xl text-center text-white drop-shadow-md font-bold mt-10">
+                <!-- Short message will fly here -->
+            </div>
+
+            <button id="btn-to-pin" class="hidden mt-12 bg-white text-pink-600 px-8 py-3 rounded-full font-bold shadow-lg pulse-btn">
+                Lanjut 💌
+            </button>
+        </div>
+    </section>
+
+    <section id="page-pin-message" class="page-section glass-panel rounded-3xl p-6 shadow-2xl mx-4">
+        
+        <!-- PIN Input Area -->
+        <div id="pin-area" class="w-full flex flex-col items-center">
+            <h2 class="font-romantic text-3xl mb-4">Verifikasi Diri</h2>
+            <p class="text-sm mb-6 text-center opacity-90">Masukkan kode PIN spesial untuk membuka suratmu.</p>
+            
+            <div class="flex gap-2 mb-4" id="pin-inputs">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+                <input type="tel" maxlength="1" class="pin-box w-10 h-12 bg-white/20 border border-white/50 rounded-lg text-center text-2xl font-bold text-white focus:outline-none focus:bg-white/40 transition-colors">
+            </div>
+            
+            <p id="pin-error" class="text-red-300 text-sm h-5 mb-2"></p>
+            <p class="text-xs opacity-75 italic text-center mt-2">Petunjuk: PIN-nya sesuai <br> (2 digit Tahun Lahir) + (Tanggal & Bulan Ulang Tahunmu) 😉</p>
+        </div>
+
+        <!-- Long Message Area (Hidden by default) -->
+        <div id="message-area" class="w-full hidden flex-col items-center h-full max-h-[70vh]">
+            <h2 class="font-romantic text-3xl mb-4 text-center">Untukmu...</h2>
+            <div class="flex-grow w-full overflow-y-auto mb-6 pr-2 custom-scrollbar">
+                <p id="long-message-text" class="text-lg leading-relaxed text-justify typewriter-text"></p>
+            </div>
+            <button id="btn-to-rate" class="bg-white text-pink-600 px-8 py-3 rounded-full font-bold shadow-lg pulse-btn mt-auto">
+                Lanjut 💌
+            </button>
+        </div>
+    </section>
+
+    <section id="page-rate" class="page-section glass-panel rounded-3xl p-6 text-center shadow-2xl mx-4">
+        <h2 class="font-romantic text-3xl mb-2">Seberapa bahagia kamu hari ini?</h2>
+        <p class="text-sm opacity-80 mb-8">Geser coba slider yang dibawah sesuai dengan presentase kebahagianmu </p>
+
+        <div class="text-8xl mb-4 transition-transform duration-300" id="rate-emoji">🙂</div>
+        <div class="text-4xl font-bold mb-8"><span id="rate-value">50</span>%</div>
+
+        <input type="range" id="rate-slider" min="0" max="100" value="50" class="mb-10 w-full h-2">
+
+        <button id="btn-to-send" class="bg-white text-pink-600 px-8 py-3 rounded-full font-bold shadow-lg pulse-btn w-full">
+            Lanjut 💌
+        </button>
+    </section>
+
+    <section id="page-send" class="page-section glass-panel rounded-3xl p-6 shadow-2xl mx-4">
+        <h2 class="font-romantic text-3xl mb-4 text-center">Tulis pesan untuk <span id="lbl-pengirim"></span></h2>
+        <p class="text-sm opacity-80 mb-4 text-center">Ada yang ingin kamu sampaikan setelah membaca semuanya?</p>
+        
+        <textarea id="user-message" rows="5" class="w-full bg-white/20 border border-white/40 rounded-xl p-4 text-white placeholder-white/60 focus:outline-none focus:bg-white/30 transition-colors resize-none mb-2" placeholder="Tulis pesanmu di sini..."></textarea>
+        <p id="send-error" class="text-red-300 text-sm h-5 mb-4 text-center"></p>
+
+        <button id="btn-send-wa" class="bg-[#25D366] text-white px-8 py-3 rounded-full font-bold shadow-lg pulse-btn w-full flex items-center justify-center gap-2">
+            Kirim via WhatsApp 💬
+        </button>
+    </section>
+
+    <section id="page-end" class="page-section">
+        <div class="text-center glass-panel p-8 rounded-3xl mx-4 shadow-2xl">
+            <div class="text-7xl mb-4">🫶🏻</div>
+            <h2 class="font-romantic text-4xl mb-4">Terima kasih!</h2>
+            <p class="text-lg">Semoga harimu dipenuhi senyuman dan kebahagiaan. I love you!</p>
+            <button onclick="location.reload()" class="mt-8 text-sm opacity-70 underline hover:opacity-100 transition-opacity">
+                Ulangi dari awal
+            </button>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    /* ==========================================
+       DATA YANG BISA DIEDIT (CONFIG)
+       ========================================== */
+    const CONFIG = {
+        namaPenerima: "amyy", 
+        tanggalUlangTahun: "03-10", // Format DD-MM (Tanggal-Bulan)
+        tahunLahir: "08", // 2 Digit terakhir tahun lahir (Contoh: 2008 -> 08)
+        tahunPerayaan: 2026, // Tahun ulang tahun yang dirayakan
+        nomorWhatsApp: "+6281244670441", // Ganti dengan nomor WA mu (tanpa +)
+        namaPengirim: "sayaa (mungkin)",
+        ucapanSingkat: "happy level up dayy, amyy",
+        ucapanPanjang: "Hai amyyy, selamat ulang tahun nahhh!\n\nDi hari yang sangat spesial ini, cuman mauja bilang, suatu kebahagiaan bisa mengenalmu....jika bisa lebih dalam lagi. tetap jadi orang yang ceria nahhh dan jangan mudah ilfil\n\nSemoga di umurmu yang baru ini, kamu selalu diberikan kesehatan, kebahagiaan yang melimpah, dan segala impianmu satu per satu bisa terwujud.\n\nTetap jadi dirita yang luar biasa nahh. semoga hasil terbaik selalu menyertai setiap usahamu.\n\n pliss jangan ilfil nahh sama ucapannya sama sya jga, pokoknya harus bahagia setelah bacaa ini ",
+        testMode: false, // Ubah ke true jika ingin melewati hitung mundur untuk testing
+        musicUrl: "https://mp3tourl.com/audio/1790811423527-66f78a52-a823-4098-9dd2-b5acd56dabd0.mp3" // Link lagu ditambahkan di sini
+    };
+
+    // Menyiapkan musik latar
+    const backgroundMusic = new Audio(CONFIG.musicUrl);
+    backgroundMusic.loop = false;
+
+    /* ==========================================
+       VARIABEL & SETUP AWAL
+       ========================================== */
+    // Set UI text
+    document.getElementById('lbl-nama').innerText = CONFIG.namaPenerima;
+    document.getElementById('lbl-pengirim').innerText = CONFIG.namaPengirim;
+    
+    // Pages
+    const pages = {
+        countdown: document.getElementById('page-countdown'),
+        gift: document.getElementById('page-gift'),
+        pin: document.getElementById('page-pin-message'),
+        rate: document.getElementById('page-rate'),
+        send: document.getElementById('page-send'),
+        end: document.getElementById('page-end')
+    };
+
+    function showPage(pageName) {
+        Object.values(pages).forEach(p => p.classList.remove('active'));
+        pages[pageName].classList.add('active');
+    }
+
+    /* ==========================================
+       ANIMASI BACKGROUND (HATI & MAWAR)
+       ========================================== */
+    const container = document.getElementById('floating-container');
+    const symbols = ['❤️', '💖', '💕', '🌹','🫶🏻'];
+    
+    function createFloatingElement() {
+        const el = document.createElement('div');
+        el.classList.add('floating-item', 'text-2xl', 'md:text-4xl');
+        el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        
+        // Random horizontal position
+        el.style.left = Math.random() * 100 + 'vw';
+        
+        // Random animation duration (5s - 15s)
+        const duration = Math.random() * 10 + 5;
+        el.style.animationDuration = duration + 's';
+        
+        // Random sizes
+        const scale = Math.random() * 0.8 + 0.5;
+        el.style.transform = `scale(${scale})`;
+
+        container.appendChild(el);
+
+        // Remove after animation completes to avoid DOM clutter
+        setTimeout(() => {
+            el.remove();
+        }, duration * 1000);
+    }
+
+    // Spawn elements periodically
+    setInterval(createFloatingElement, 400);
+    // Create initial batch
+    for(let i=0; i<15; i++) setTimeout(createFloatingElement, i * 200);
+
+    /* ==========================================
+       HALAMAN 1: HITUNG MUNDUR
+       ========================================== */
+    const targetDateStr = `${CONFIG.tahunPerayaan}-${CONFIG.tanggalUlangTahun.split('-')[1]}-${CONFIG.tanggalUlangTahun.split('-')[0]}T00:00:00`;
+    const targetDate = new Date(targetDateStr).getTime();
+    
+    const btnOpenGift = document.getElementById('btn-open-gift');
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0 || CONFIG.testMode) {
+            // Waktu tiba!
+            document.getElementById('cd-hari').innerText = "00";
+            document.getElementById('cd-jam').innerText = "00";
+            document.getElementById('cd-menit').innerText = "00";
+            document.getElementById('cd-detik').innerText = "00";
+            
+            btnOpenGift.disabled = false;
+            btnOpenGift.classList.remove('cursor-not-allowed', 'bg-white/30', 'text-white/50');
+            btnOpenGift.classList.add('bg-white', 'text-pink-600', 'pulse-btn');
+            btnOpenGift.innerHTML = 'Buka Ucapan 💌';
+            return true;
+        }
+
+        // Kalkulasi
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-hari').innerText = days.toString().padStart(2, '0');
+        document.getElementById('cd-jam').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('cd-menit').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('cd-detik').innerText = seconds.toString().padStart(2, '0');
+        
+        return false;
+    }
+
+    if (!updateCountdown()) {
+        const timerInterval = setInterval(() => {
+            if (updateCountdown()) clearInterval(timerInterval);
+        }, 1000);
+    }
+
+    btnOpenGift.addEventListener('click', () => {
+        // Mainkan lagunya saat tombol "Buka Ucapan" ditekan
+        backgroundMusic.play().catch(error => {
+            console.log("Musik belum bisa diputar:", error); 
+        });
+        
+        showPage('gift');
+    });
+
+    /* ==========================================
+       HALAMAN 2: KOTAK KADO & CONFETTI
+       ========================================== */
+    const giftBox = document.getElementById('gift-box');
+    const shortMessage = document.getElementById('short-message');
+    const btnToPin = document.getElementById('btn-to-pin');
+    const giftTitle = document.getElementById('gift-title');
+
+    function createConfetti(x, y) {
+        const colors = ['#ff0055', '#ffaa00', '#00ffaa', '#00aaff', '#aa00ff', '#ffffff'];
+        for (let i = 0; i < 60; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = x + 'px';
+            confetti.style.top = y + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(confetti);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 50 + Math.random() * 150;
+            const tx = Math.cos(angle) * velocity;
+            const ty = Math.sin(angle) * velocity - 100; // throw up a bit
+
+            confetti.animate([
+                { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+                { transform: `translate(${tx}px, ${ty + 300}px) rotate(${Math.random()*720}deg)`, opacity: 0 }
+            ], {
+                duration: 1000 + Math.random() * 1000,
+                easing: 'cubic-bezier(0,0,0.2,1)'
+            }).onfinish = () => confetti.remove();
+        }
+    }
+
+    giftBox.addEventListener('click', (e) => {
+        // Hentikan animasi goyang
+        giftBox.classList.remove('wiggle');
+        giftBox.classList.remove('cursor-pointer', 'hover:scale-110');
+        
+        // Dapatkan posisi kado untuk ledakan confetti
+        const rect = giftBox.getBoundingClientRect();
+        createConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        // Ubah kado terbuka
+        giftBox.innerText = '🎁';
+        giftBox.style.opacity = '0.5';
+        giftTitle.classList.add('hidden');
+
+        // Munculkan teks terbang
+        shortMessage.innerText = CONFIG.ucapanSingkat;
+        shortMessage.classList.remove('hidden');
+        shortMessage.classList.add('fly-up');
+
+        // Munculkan tombol lanjut
+        setTimeout(() => {
+            btnToPin.classList.remove('hidden');
+        }, 1500);
+    });
+
+    btnToPin.addEventListener('click', () => {
+        showPage('pin');
+    });
+
+    /* ==========================================
+       HALAMAN 3: PIN & PESAN PANJANG (TYPEWRITER)
+       ========================================== */
+    // Kalkulasi PIN: TahunLahir + TglBulan (DDMM)
+    // misal: "08" + "1708" = "081708"
+    const expectedPIN = CONFIG.tahunLahir + CONFIG.tanggalUlangTahun.replace('-', '');
+    
+    const pinInputs = document.querySelectorAll('.pin-box');
+    const pinArea = document.getElementById('pin-area');
+    const messageArea = document.getElementById('message-area');
+    const pinError = document.getElementById('pin-error');
+    
+    // Handle Input Logic
+    pinInputs.forEach((input, index) => {
+        // Auto focus next
+        input.addEventListener('input', (e) => {
+            // Hanya angka
+            input.value = input.value.replace(/[^0-9]/g, '');
+            
+            if (input.value !== '' && index < 5) {
+                pinInputs[index + 1].focus();
+            }
+            
+            // Check PIN if all filled
+            const currentPin = Array.from(pinInputs).map(i => i.value).join('');
+            if (currentPin.length === 6) {
+                verifyPin(currentPin);
+            }
+        });
+
+        // Handle backspace
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && input.value === '' && index > 0) {
+                pinInputs[index - 1].focus();
+                pinInputs[index - 1].value = '';
+            }
+        });
+
+        // Handle paste
+        input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
+            if (pastedData) {
+                for (let i = 0; i < pastedData.length; i++) {
+                    if (pinInputs[i]) pinInputs[i].value = pastedData[i];
+                }
+                if (pastedData.length === 6) {
+                    verifyPin(pastedData);
+                    pinInputs[5].focus();
+                } else {
+                    pinInputs[pastedData.length].focus();
+                }
+            }
+        });
+    });
+
+    function verifyPin(pin) {
+        if (pin === expectedPIN) {
+            // PIN Benar
+            pinError.innerText = "";
+            pinArea.style.opacity = '0';
+            setTimeout(() => {
+                pinArea.classList.add('hidden');
+                messageArea.classList.remove('hidden');
+                messageArea.classList.add('flex');
+                startTypewriter();
+            }, 500);
+        } else {
+            // PIN Salah
+            pinArea.classList.remove('shake');
+            void pinArea.offsetWidth; // trigger reflow
+            pinArea.classList.add('shake');
+            pinError.innerText = "PIN salah, coba lagi ya 🥺";
+            
+            setTimeout(() => {
+                pinInputs.forEach(i => i.value = '');
+                pinInputs[0].focus();
+            }, 400);
+        }
+    }
+
+    // Typewriter Effect
+    function startTypewriter() {
+        const textElement = document.getElementById('long-message-text');
+        const text = CONFIG.ucapanPanjang;
+        textElement.innerHTML = ''; // bersihkan
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                // Konversi newline (\n) ke <br>
+                if (text.charAt(i) === '\n') {
+                    textElement.innerHTML += '<br>';
+                } else {
+                    textElement.innerHTML += text.charAt(i);
+                }
+                i++;
+                // Scroll down otomatis
+                textElement.parentElement.scrollTop = textElement.parentElement.scrollHeight;
+                setTimeout(typeWriter, Math.random() * 30 + 20); // kecepatan ketik random (20-50ms)
+            } else {
+                // Matikan cursor blinking
+                textElement.classList.remove('typewriter-text');
+                textElement.style.borderRight = "none";
+            }
+        }
+        typeWriter();
+    }
+
+    document.getElementById('btn-to-rate').addEventListener('click', () => {
+        showPage('rate');
+    });
+
+    /* ==========================================
+       HALAMAN 4: RATE KEBAHAGIAAN
+       ========================================== */
+    const slider = document.getElementById('rate-slider');
+    const rateValue = document.getElementById('rate-value');
+    const rateEmoji = document.getElementById('rate-emoji');
+    let currentRate = 50;
+
+    slider.addEventListener('input', (e) => {
+        currentRate = e.target.value;
+        rateValue.innerText = currentRate;
+        
+        // Ubah Emoji dan warna latar slider (track)
+        let emoji = '🙂';
+        let progressColor = `rgba(255, 255, 255, 0.5)`;
+        
+        if (currentRate <= 20) {
+            emoji = '🥺';
+            progressColor = '#ff4d4d'; // merah
+        } else if (currentRate <= 50) {
+            emoji = '🙂';
+            progressColor = '#ffd633'; // kuning
+        } else if (currentRate <= 80) {
+            emoji = '😊';
+            progressColor = '#66ff66'; // hijau muda
+        } else {
+            emoji = '🥰';
+            progressColor = '#ff66b3'; // pink terang
+        }
+        
+        // Animasi emoji
+        rateEmoji.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+            rateEmoji.innerText = emoji;
+            rateEmoji.style.transform = 'scale(1.1)';
+            setTimeout(() => rateEmoji.style.transform = 'scale(1)', 150);
+        }, 100);
+
+        // Update Slider Track Color (Hackish way with linear-gradient)
+        slider.style.background = `linear-gradient(to right, ${progressColor} ${currentRate}%, rgba(255,255,255,0.4) ${currentRate}%)`;
+    });
+
+    // Inisialisasi awal slider background
+    slider.dispatchEvent(new Event('input'));
+
+    document.getElementById('btn-to-send').addEventListener('click', () => {
+        showPage('send');
+    });
+
+    /* ==========================================
+       HALAMAN 5: KIRIM PESAN WHATSAPP
+       ========================================== */
+    const userMessage = document.getElementById('user-message');
+    const sendError = document.getElementById('send-error');
+    const btnSendWA = document.getElementById('btn-send-wa');
+
+    btnSendWA.addEventListener('click', () => {
+        const msg = userMessage.value.trim();
+        
+        if (msg === "") {
+            sendError.innerText = "Tulis mi saja sesuatu apakekk, masa iya nda ada";
+            userMessage.classList.add('shake');
+            setTimeout(() => userMessage.classList.remove('shake'), 400);
+            return;
+        }
+        
+        sendError.innerText = "";
+        
+        // Format Pesan WA
+        const waText = `wehhhh dzaki, pesan dari saya ${CONFIG.namaPenerima}!\nKebahagiaanku hari ini: ${currentRate}%\nPesanku:\n${msg}\n\n— ${CONFIG.namaPenerima}`;
+        
+        const encodedText = encodeURIComponent(waText);
+        const waURL = `https://wa.me/${CONFIG.nomorWhatsApp}?text=${encodedText}`;
+        
+        // Buka Tab Baru WA
+        window.open(waURL, '_blank');
+        
+        // Pindah ke Halaman Penutup
+        showPage('end');
+        
+    });
+</script>
+</body>
+</html>
